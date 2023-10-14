@@ -7,7 +7,7 @@ import logoipsum from "../../assets/icons/footer-icons/logoipsum.png"
 const Footer = () => {
     return (
         <footer >
-            <div className='w-[1536px] h-[341px] bg-gradient-radial'>
+            <div className='w-[1536px] h-[341px] bg-gradient-footer'>
 
                 {/* details */}
                 <section className='w-[1280px] h-[244px] flex justify-evenly pt-[41px] mx-[128px]'>
@@ -31,7 +31,7 @@ const Footer = () => {
                     <div>
                         <p className='w-[101.33px] text-white text-[14px] font-sans'>SUPPORT</p>
                     </div>
-                    
+
                     <div>
                         <p className='w-[101.33px] text-white text-[14px] font-sans'>LEGAL</p>
                     </div>
@@ -39,7 +39,7 @@ const Footer = () => {
                 </section>
 
                 {/* dividing line */}
-                <section className='w-[1280px] border-[1px] px-[128px] mx-auto flex-shrink-0 stroke-1'>
+                <section className='w-[1280px] border-[1px] px-[128px] mx-auto flex-shrink-0 stroke-1 text-[#fff]'>
 
                 </section>
 
