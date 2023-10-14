@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react"
 import arrow from "../../assets/icons/header-icons/Down arrow.png"
 import logo from "../../assets/icons/header-icons/logoipsum.png"
 import pic1 from "../../assets/images/herosection/Picture1.png"
@@ -5,6 +6,28 @@ import pic2 from "../../assets/images/herosection/Picture2.png"
 import pic3 from "../../assets/images/herosection/Picture3.png"
 
 const HeroSection = () => {
+
+    const [nameSearch, setNameSearch] = useState("")
+    const [cas, setCas] = useState([]);
+    const [error, setError] = useState(null);
+
+    const searchCa = async () => {
+        try {
+            const response = await fetch("http://localhost:5050/ca")
+            const data = await response.json()
+            if (data.length) {
+                setCas(data)
+                setError(null)
+            } else {
+                setCas([])
+                setError("No result Found")
+            }
+        }
+        catch (err) {
+            setError("Error fetching data")
+        }
+    }
+    
     return (
         <main className='w-[1536px] h-[803px] bg-gradient-hero relative mb-[132px]'>
             {/* topbar */}
@@ -63,14 +86,36 @@ const HeroSection = () => {
                     {/* rectangle */}
                     <div className='w-[670px] h-[73px] bg-[#fff] flex-shrink-0 border border-[#BFBFBF] rounded-[10px] divide-solid flex justify-between items-center'>
                         <input
-                            className='w-[384px] h-[19.585px] flex-shrink-0 text-[18px] font-bold font-inter ml-[30px]'
-                            type="text" name='name' placeholder='Search by name' />
+                            type="text"
+                            className='w-[384px] h-[19.585px] flex-shrink-0 text-[18px] font-bold font-inter ml-[30px] outline-none'
+                            name='name'
+                            id="searchInput"
+                            placeholder='Search by name'
+                            value={nameSearch}
+                            onChange={(e) => setNameSearch(e.target.value)}
+                        />
+
                         <button
+                            onClick={searchCa}
                             className='w-[183px] h-[73px] flex-shrink-0 rounded-[10px] bg-buttonBlue'
                         >
+
                             <p className='my-[27px] mx-[65px] text-center text-[16px] leading-normal font-inter text-[#fff]'>Search</p>
                         </button>
                     </div>
+                    {
+                        nameSearch.length > 0 && (
+                            <div>
+                                {
+                                    <div>
+                                        {cas.map((ca) => (
+                                            <p key={ca.id}> {ca.name} </p>
+                                        ))}
+                                    </div>
+                                }
+                            </div>
+                        )
+                    }
                 </div>
             </section>
 
